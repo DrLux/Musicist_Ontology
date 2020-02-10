@@ -11,8 +11,10 @@
                                                                 owl:imports <http://www.ontologydesignpatterns.org/cp/owl/set.owl> ;
                                                                 <http://purl.org/dc/elements/1.1/creator> "Luca Sorrentino"@en ;
                                                                 <http://purl.org/dc/elements/1.1/date> "2020-02-08T00:00:00"@en ;
+                                                                <http://purl.org/dc/elements/1.1/title> "Musicista"@en ;
+                                                                <http://purl.org/vocab/vann/preferredNamespacePrefix> "mu" ;
                                                                 <http://purl.org/vocab/vann/preferredNamespaceUri> "http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista"^^xsd:anyURI ;
-                                                                rdfs:comment "L'ontologia si propone di modellare il dominio relativo all'ambito artistico, in particolare si prende in esame il concetto di Musicista/Cantante con particolare riferimento alla musica Rap."@en ;
+                                                                <http://purl.org/dc/elements/1.1/description> "L'ontologia si propone di modellare il dominio relativo all'ambito artistico, in particolare si prende in esame il concetto di Musicista/Cantante con particolare riferimento alla musica Rap."@en ;
                                                                 rdfs:label "Progetto \"Modellazione Concettuale per il Web Semantico\" 2019/2020"@en .
 
 #################################################################
