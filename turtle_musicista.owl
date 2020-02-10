@@ -1,0 +1,1034 @@
+@prefix : <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista> .
+@prefix mu: <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista> .
+
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista> rdf:type owl:Ontology ;
+                                                                owl:imports <http://www.ontologydesignpatterns.org/cp/owl/set.owl> ;
+                                                                <http://purl.org/dc/elements/1.1/creator> "Luca Sorrentino"@en ;
+                                                                <http://purl.org/dc/elements/1.1/date> "2020-02-08T00:00:00"@en ;
+                                                                <http://purl.org/vocab/vann/preferredNamespaceUri> "http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista"^^xsd:anyURI ;
+                                                                rdfs:comment "L'ontologia si propone di modellare il dominio relativo all'ambito artistico, in particolare si prende in esame il concetto di Musicista/Cantante con particolare riferimento alla musica Rap."@en ;
+                                                                rdfs:label "Progetto \"Modellazione Concettuale per il Web Semantico\" 2019/2020"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+<http://purl.org/dc/elements/1.1/date> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+<http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
+
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> rdfs:domain mu:Discography ;
+                                                                              rdfs:range mu:Album .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> rdfs:domain mu:Album ;
+                                                                               rdfs:range mu:Discography .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistacollaborateWith
+mu:collaborateWith rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdf:type owl:SymmetricProperty ;
+                   rdfs:domain mu:Artist ;
+                   rdfs:range mu:Artist ;
+                   rdfs:comment "Relation between an artist and another artist"@en ;
+                   rdfs:label "collaborateWith"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistacontain
+mu:contain rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           owl:inverseOf mu:isContainedIn ;
+           rdfs:domain mu:Album ;
+           rdfs:range mu:Track ;
+           rdfs:comment "Relation between an Album and its tracks"@en ;
+           rdfs:label "contain"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistahasA
+mu:hasA rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain mu:Singer ;
+        rdfs:range mu:Discography ;
+        rdfs:comment "Relation between an artist and his Discography"@en ;
+        rdfs:label "hasA"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistahasGenre
+mu:hasGenre rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain mu:Singer ;
+            rdfs:range mu:MusicGenre ;
+            rdfs:comment "Relation between a Musicist and his MusicGenre"@en ;
+            rdfs:label "hasGenre"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistahasReceived
+mu:hasReceived rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               owl:inverseOf mu:receive ;
+               rdfs:domain mu:Award ;
+               rdfs:range mu:Artist ;
+               rdfs:comment "The relation between an Award and the Singer who receive it"@en ;
+               rdfs:label "hasReceived"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistahosts
+mu:hosts rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         owl:inverseOf mu:partecipateTo ;
+         rdfs:domain mu:Festival ;
+         rdfs:range mu:Singer ;
+         rdfs:comment "Relation between the festival and its guest (musicians)"@en ;
+         rdfs:label "hosts"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaisContainedIn
+mu:isContainedIn rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain mu:Track ;
+                 rdfs:range mu:Album ;
+                 rdfs:comment "Relation between a Track and the Album where it came from"@en ;
+                 rdfs:label "isContainedIn"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaisPerformedBy
+mu:isPerformedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 owl:inverseOf mu:perform ;
+                 rdfs:domain mu:Concert ;
+                 rdfs:range mu:Singer ;
+                 rdfs:comment "Relation between the concert entity and the Singer who create it"@en ;
+                 rdfs:label "isPerformedBy"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistamadeBy
+mu:madeBy rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          owl:inverseOf mu:make ;
+          rdfs:domain mu:MusicWork ;
+          rdfs:range mu:Singer ;
+          rdfs:comment "Relation between a MusicWork and the Musicist who created it"@en ;
+          rdfs:label "madeBy"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistamake
+mu:make rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
+        rdfs:domain mu:Singer ;
+        rdfs:range mu:MusicWork ;
+        rdfs:comment "Relation between an Musicist and his MusicWork"@en ;
+        rdfs:label "make"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaolderThen
+mu:olderThen rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdf:type owl:TransitiveProperty ;
+             rdfs:domain mu:Album ;
+             rdfs:range mu:Album ;
+             rdfs:comment "Relation between an album and another album"@en ;
+             rdfs:label "olderThen"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistapartecipateTo
+mu:partecipateTo rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain mu:Singer ;
+                 rdfs:range mu:Festival ;
+                 rdfs:comment "Relation between the Singer and the Festival in wich he partecipate"@en ;
+                 rdfs:label "partecipateTo"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistaperform
+mu:perform rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain mu:Singer ;
+           rdfs:range mu:Concert ;
+           rdfs:comment "Relation between the musicist and his concert"@en ;
+           rdfs:label "perform"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistaproduce
+mu:produce rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain mu:BeatMaker ;
+           rdfs:range mu:Beat ;
+           rdfs:comment "Relation between an Beatmaker and the beat he produce"@en ;
+           rdfs:label "produce"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistapublishSong
+mu:publishSong rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain mu:Singer ;
+               rdfs:range mu:Track ;
+               owl:propertyChainAxiom ( mu:releaseAlbum
+                                        mu:contain
+                                      ) ;
+               rdfs:comment "Relation between a Singer and the song he publish"@en ;
+               rdfs:label "publishSong"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistareceive
+mu:receive rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain mu:Singer ;
+           rdfs:range mu:Award ;
+           rdfs:comment "The relation between a Singer and an Award"@en ;
+           rdfs:label "receive"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistareleaseAlbum
+mu:releaseAlbum rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain mu:Singer ;
+                rdfs:range mu:Album ;
+                rdfs:comment "Relation between a singer and the album i release"@en ;
+                rdfs:label "releaseAlbum"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistawriteSong
+mu:writeSong rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain mu:Singer ;
+             rdfs:range mu:MusicWork ;
+             rdfs:comment "Relation between a singer and his musicwork"@en ;
+             rdfs:label "writeSong"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/cp/owl/set.owl#size
+<http://www.ontologydesignpatterns.org/cp/owl/set.owl#size> rdfs:domain mu:Discography .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistaage
+mu:age rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdfs:domain mu:Person ;
+       rdfs:range xsd:int ;
+       rdfs:comment "Indicate the Person's age"@en ;
+       rdfs:label "age"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistacopiesSold
+mu:copiesSold rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdf:type owl:FunctionalProperty ;
+              rdfs:domain mu:Album ;
+              rdfs:range xsd:negativeInteger ;
+              rdfs:comment "Indicate the number of copies tha are be sold"@en ;
+              rdfs:label "copiesSold"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicistapseudonym
+mu:pseudonym rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain mu:Artist ;
+             rdfs:range xsd:string ;
+             rdfs:comment "A fictitious name, especially one used by an author."@en ;
+             rdfs:label "pseudonym"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistayearsOfPubblication
+mu:yearsOfPubblication rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain mu:Album ;
+                       rdfs:range xsd:nonNegativeInteger ;
+                       rdfs:comment "Indicate the year in wich the album was released"@en ;
+                       rdfs:label "yearsOfPubblication"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://linkedevents.org/ontology/Event
+<http://linkedevents.org/ontology/Event> rdf:type owl:Class ;
+                                         owl:equivalentClass mu:Event ;
+                                         rdfs:comment "(FROM LODE) Something that happened,\" as might be reported in a news article"@en ;
+                                         rdfs:label "Event"@en .
+
+
+###  http://purl.org/ontology/mo/Track
+<http://purl.org/ontology/mo/Track> rdf:type owl:Class ;
+                                    owl:equivalentClass mu:Track ;
+                                    rdfs:comment "(FROM MUSIC ONTOLOGY) A track on a particular record"@en ;
+                                    rdfs:label "Track"@en .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> rdfs:subClassOf owl:Thing .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaAlbum
+mu:Album rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> ;
+                               owl:someValuesFrom mu:Discography
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty mu:contain ;
+                               owl:minQualifiedCardinality "5"^^xsd:nonNegativeInteger ;
+                               owl:onClass mu:Track
+                             ] ;
+         rdfs:subClassOf mu:MusicWork ;
+         owl:disjointWith mu:Track ;
+         rdfs:comment "An Album is a collection of tracks"@en ;
+         rdfs:label "Album"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaArtist
+mu:Artist rdf:type owl:Class ;
+          rdfs:subClassOf mu:Person ;
+          rdfs:comment "A oerson who produce art"@en ;
+          rdfs:label "Artist"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaAward
+mu:Award rdf:type owl:Class ;
+         rdfs:subClassOf owl:Thing ;
+         rdfs:comment "A recognition for the artist"@en ;
+         rdfs:label "Award"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaBeat
+mu:Beat rdf:type owl:Class ;
+        rdfs:subClassOf mu:MusicWork ;
+        rdfs:comment "The beat of a piece of music is the main rhythm that it has."@en ;
+        rdfs:label "Beat"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaBeatMaker
+mu:BeatMaker rdf:type owl:Class ;
+             rdfs:subClassOf mu:Artist ;
+             rdfs:comment "An artist responsible for constructing a beat and melody"@en ;
+             rdfs:label "BeatMaker"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaConcert
+mu:Concert rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty mu:isPerformedBy ;
+                                 owl:someValuesFrom mu:Singer
+                               ] ;
+           rdfs:subClassOf mu:Event ;
+           owl:disjointWith mu:Festival ;
+           rdfs:comment "A live performance by an artist"@en ;
+           rdfs:label "Concert"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaDiscography
+mu:Discography rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
+                                     owl:someValuesFrom mu:Album
+                                   ] ;
+               rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/set.owl#Set> ;
+               rdfs:comment "An history of all Musicist's productions"@en ;
+               rdfs:label "Discography"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaEvent
+mu:Event rdf:type owl:Class ;
+         rdfs:subClassOf owl:Thing ;
+         rdfs:comment "Fact or event that has already occurred or that may occur"@en ;
+         rdfs:label "Event"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaFestival
+mu:Festival rdf:type owl:Class ;
+            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                  owl:onProperty mu:hosts ;
+                                  owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                  owl:onClass mu:Singer
+                                ] ;
+            rdfs:subClassOf mu:Event ;
+            rdfs:comment "An Event where multiple artists perform"@en ;
+            rdfs:label "Festival"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaLyrics
+mu:Lyrics rdf:type owl:Class ;
+          rdfs:subClassOf mu:MusicWork ;
+          rdfs:comment "the words of a song"@en ;
+          rdfs:label "Lyrics"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMusicGenre
+mu:MusicGenre rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:oneOf ( mu:Indie
+                                                mu:Metal
+                                                mu:Pop
+                                                mu:Rap
+                                                mu:Rock
+                                                mu:Trap
+                                              )
+                                  ] ;
+              rdfs:subClassOf owl:Thing ;
+              rdfs:comment "A music genre is a conventional category that identifies some pieces of music as belonging to a shared tradition or set of conventions"@en ;
+              rdfs:label "MusicGenre"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMusicWork
+mu:MusicWork rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty mu:madeBy ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass mu:Singer
+                                 ] ;
+             rdfs:subClassOf owl:Thing ;
+             rdfs:comment "The product of the Musicist's work"@en ;
+             rdfs:label "MusicWork"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaPerson
+mu:Person rdf:type owl:Class ;
+          owl:equivalentClass <http://xmlns.com/foaf/0.1/Person> ;
+          rdfs:subClassOf owl:Thing ;
+          rdfs:comment "A human kind of individual"@en ;
+          rdfs:label "Person"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRapper
+mu:Rapper rdf:type owl:Class ;
+          rdfs:subClassOf mu:Singer ;
+          rdfs:comment "A music artis who produce rap music"@en ;
+          rdfs:label "Rapper"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaSinger
+mu:Singer rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                owl:onProperty mu:make ;
+                                owl:someValuesFrom mu:MusicWork
+                              ] ;
+          rdfs:subClassOf mu:Artist ;
+          rdfs:comment "An artist specialised in music"@en ;
+          rdfs:label "Singer"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTrack
+mu:Track rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty mu:isContainedIn ;
+                               owl:minQualifiedCardinality "5"^^xsd:nonNegativeInteger ;
+                               owl:onClass mu:Album
+                             ] ;
+         rdfs:subClassOf mu:MusicWork ;
+         rdfs:comment "A track is a song made by a Musicist"@en ;
+         rdfs:label "Track"@en .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaBeautiful
+mu:Beautiful rdf:type owl:NamedIndividual ,
+                      mu:Track ;
+             mu:isContainedIn mu:Relapse ;
+             mu:madeBy mu:Eminem ;
+             rdfs:comment "An Eminem' s Song"@en ;
+             rdfs:label "Beautiful"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaDarkness
+mu:Darkness rdf:type owl:NamedIndividual ,
+                     mu:Track ;
+            mu:isContainedIn mu:MusicToBeMurderedBy ;
+            rdfs:comment "An Eminem's Song"@en ;
+            rdfs:label "Darkness"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaDiventaQuelloCheSei
+mu:DiventaQuelloCheSei rdf:type owl:NamedIndividual ,
+                                mu:Track ;
+                       mu:isContainedIn mu:SoulOfASupertramp ;
+                       rdfs:comment "A Mezzosangue's Song"@en ;
+                       rdfs:label "DiventaQuelloCheSei"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaEminem
+mu:Eminem rdf:type owl:NamedIndividual ,
+                   mu:Singer ;
+          owl:sameAs mu:OWLNamedIndividual_5586c80a_0cc6_4c44_be21_084b98e76be4 ;
+          mu:hasA mu:EminemSDiscography ;
+          mu:hasGenre mu:Rap ;
+          mu:partecipateTo mu:Lollapalooza ;
+          mu:perform mu:MilanConcert ;
+          mu:receive mu:Oscar ;
+          mu:age 47 ;
+          mu:pseudonym "SlimShady" ;
+          rdfs:comment "The best rapper alive"@en ;
+          rdfs:label "Eminem"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaEminemSDiscography
+mu:EminemSDiscography rdf:type owl:NamedIndividual ,
+                               mu:Discography ;
+                      <http://www.ontologydesignpatterns.org/cp/owl/set.owl#size> 11 ;
+                      rdfs:comment "A descriptive catalogue of musical recordings"@en ;
+                      rdfs:label "EminemSDiscography"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaEncore
+mu:Encore rdf:type owl:NamedIndividual ,
+                   mu:Album ;
+          <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+          mu:contain <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Just_Lose_It'> ;
+          mu:olderThen mu:Relapse ;
+          mu:yearsOfPubblication 2004 ;
+          rdfs:comment "An Eminem's album"@en ;
+          rdfs:label "Encore"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaIndie
+mu:Indie rdf:type owl:NamedIndividual ,
+                  mu:MusicGenre ;
+         rdfs:comment "A kind of music genre"@en ;
+         rdfs:label "Indie"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaInfinite
+mu:Infinite rdf:type owl:NamedIndividual ,
+                     mu:Album ;
+            <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+            mu:contain <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#313> ;
+            mu:olderThen mu:TheSlimShadyLP ;
+            mu:yearsOfPubblication 1996 ;
+            rdfs:comment "First Eminem's Album"@en ;
+            rdfs:label "Infinite"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaKamikaze
+mu:Kamikaze rdf:type owl:NamedIndividual ,
+                     mu:Album ;
+            <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+            mu:contain mu:LuckyYou ;
+            mu:olderThen mu:MusicToBeMurderedBy ;
+            mu:yearsOfPubblication 2018 ;
+            rdfs:comment "An Eminem's Album"@en ;
+            rdfs:label "Kamikaze"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaLollapalooza
+mu:Lollapalooza rdf:type owl:NamedIndividual ,
+                         mu:Festival ;
+                mu:hosts mu:Eminem ,
+                         mu:Rihanna ;
+                rdfs:comment "is an annual four-day music festival based in Chicago"@en ;
+                rdfs:label "Lollapalooza"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaLoveTheWayYouLie
+mu:LoveTheWayYouLie rdf:type owl:NamedIndividual ,
+                             mu:Track ;
+                    mu:isContainedIn mu:Recovery ;
+                    mu:madeBy mu:Eminem ,
+                              mu:Rihanna ;
+                    rdfs:comment "Song made by Eminem featuring Rihanna"@en ;
+                    rdfs:label "LoveTheWayYouLie"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaLuckyYou
+mu:LuckyYou rdf:type owl:NamedIndividual ,
+                     mu:Track ;
+            mu:isContainedIn mu:Kamikaze ;
+            rdfs:comment "An Eminem's song"@en ;
+            rdfs:label "LuckyYou"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMetal
+mu:Metal rdf:type owl:NamedIndividual ,
+                  mu:MusicGenre ;
+         rdfs:comment "A kind of music genre"@en ;
+         rdfs:label "Metal"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMezzosangue
+mu:Mezzosangue rdf:type owl:NamedIndividual ,
+                        mu:Singer ;
+               mu:hasA mu:MezzosangueSDiscography ;
+               mu:hasGenre mu:Rap ;
+               mu:age 29 ;
+               mu:pseudonym "Mezzosangue" ;
+               rdfs:comment "An italian rapper"@en ;
+               rdfs:label "Mezzosangue"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMezzosangueSDiscography
+mu:MezzosangueSDiscography rdf:type owl:NamedIndividual ,
+                                    mu:Discography ;
+                           <http://www.ontologydesignpatterns.org/cp/owl/set.owl#size> 2 ;
+                           rdfs:comment "A descriptive catalogue of musical recordings" ;
+                           rdfs:label "MezzosangueSDiscography"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMilanConcert
+mu:MilanConcert rdf:type owl:NamedIndividual ,
+                         mu:Concert ;
+                rdfs:label "MilanConcert"@it .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaMusicToBeMurderedBy
+mu:MusicToBeMurderedBy rdf:type owl:NamedIndividual ,
+                                mu:Album ;
+                       <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+                       mu:contain mu:Darkness ;
+                       mu:yearsOfPubblication 2020 ;
+                       rdfs:comment "An Eminem's album"@en ;
+                       rdfs:label "MusicToBeMurderedBy"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaOWLNamedIndividual_5586c80a_0cc6_4c44_be21_084b98e76be4
+mu:OWLNamedIndividual_5586c80a_0cc6_4c44_be21_084b98e76be4 rdf:type owl:NamedIndividual ;
+                                                           mu:hasA mu:EminemSDiscography ;
+                                                           mu:hasGenre mu:Rap ;
+                                                           mu:publishSong <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#313> ;
+                                                           mu:releaseAlbum mu:Encore ,
+                                                                           mu:Infinite ,
+                                                                           mu:Kamikaze ,
+                                                                           mu:MusicToBeMurderedBy ,
+                                                                           mu:Recovery ,
+                                                                           mu:Relapse ,
+                                                                           mu:Revival ,
+                                                                           mu:TheEminemShow ,
+                                                                           mu:TheMarshallMathersLP ,
+                                                                           mu:TheMarshallMathersLP2 ,
+                                                                           mu:TheSlimShadyLP ;
+                                                           mu:age 47 ;
+                                                           mu:pseudonym "Slim Shady" ;
+                                                           <http://purl.org/vocab/vann/preferredNamespaceUri> "Eminem"@en ;
+                                                           rdfs:comment "Eminem is a rapper"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaOscar
+mu:Oscar rdf:type owl:NamedIndividual ,
+                  mu:Award ;
+         rdfs:comment "Is a an award"@en ;
+         rdfs:label "Oscar"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaPop
+mu:Pop rdf:type owl:NamedIndividual ,
+                mu:MusicGenre ;
+       rdfs:comment "A kind of music genre"@en ;
+       rdfs:label "Pop"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRap
+mu:Rap rdf:type owl:NamedIndividual ,
+                mu:MusicGenre ;
+       rdfs:comment "A kind of music genre"@en ;
+       rdfs:label "Rap"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRecovery
+mu:Recovery rdf:type owl:NamedIndividual ,
+                     mu:Album ;
+            <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+            mu:contain <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Not_Afraid'> ;
+            mu:olderThen mu:TheMarshallMathersLP2 ;
+            mu:yearsOfPubblication 2010 ;
+            rdfs:comment "An Eminem's Album"@en ;
+            rdfs:label "Recovery"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRelapse
+mu:Relapse rdf:type owl:NamedIndividual ,
+                    mu:Album ;
+           <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+           mu:contain mu:Beautiful ;
+           mu:olderThen mu:Recovery ;
+           mu:yearsOfPubblication 2009 ;
+           rdfs:comment "An Eminem's Album"@en ;
+           rdfs:label "Relapse"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRevival
+mu:Revival rdf:type owl:NamedIndividual ,
+                    mu:Album ;
+           <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+           mu:contain mu:WalkOnWater ;
+           mu:olderThen mu:Kamikaze ;
+           mu:yearsOfPubblication 2017 ;
+           rdfs:comment "An Eminem's Album"@en ;
+           rdfs:label "Revival"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRihanna
+mu:Rihanna rdf:type owl:NamedIndividual ,
+                    mu:Singer ;
+           mu:collaborateWith mu:Eminem ;
+           mu:hasGenre mu:Pop ;
+           mu:partecipateTo mu:Lollapalooza ;
+           mu:age 31 ;
+           mu:pseudonym "Rihanna" ;
+           rdfs:comment "An american singer"@en ;
+           rdfs:label "Rihanna"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaRock
+mu:Rock rdf:type owl:NamedIndividual ,
+                 mu:MusicGenre ;
+        rdfs:comment "A kind of music genre"@en ;
+        rdfs:label "Rock"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaSoulOfASupertramp
+mu:SoulOfASupertramp rdf:type owl:NamedIndividual ,
+                              mu:Album ;
+                     <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:MezzosangueSDiscography ;
+                     mu:contain mu:DiventaQuelloCheSei ;
+                     mu:olderThen <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Tree_-_Roots_&_Crown'> ;
+                     mu:yearsOfPubblication 2015 ;
+                     rdfs:comment "An Mezzosangue's album"@en ;
+                     rdfs:label "SoulOfASupertramp"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTheEminemShow
+mu:TheEminemShow rdf:type owl:NamedIndividual ,
+                          mu:Album ;
+                 <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+                 mu:contain <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'ill_I_Collapse'> ;
+                 mu:olderThen mu:Encore ;
+                 mu:yearsOfPubblication 2002 ;
+                 rdfs:comment "An Eminem's album"@en ;
+                 rdfs:label "TheEminemShow"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTheMarshallMathersLP
+mu:TheMarshallMathersLP rdf:type owl:NamedIndividual ,
+                                 mu:Album ;
+                        <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+                        mu:contain mu:TheWayIAm ;
+                        mu:olderThen mu:Encore ,
+                                     mu:TheEminemShow ;
+                        mu:yearsOfPubblication 2000 ;
+                        rdfs:comment "An Eminem's Album"@en ;
+                        rdfs:label "TheMarshallMathersLP"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTheMarshallMathersLP2
+mu:TheMarshallMathersLP2 rdf:type owl:NamedIndividual ,
+                                  mu:Album ;
+                         <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+                         mu:contain <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Rap_God'> ;
+                         mu:olderThen mu:Revival ;
+                         mu:yearsOfPubblication 2013 ;
+                         rdfs:comment "An Eminem's Album"@en ;
+                         rdfs:label "TheMarshallMathersLP2"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTheSlimShadyLP
+mu:TheSlimShadyLP rdf:type owl:NamedIndividual ,
+                           mu:Album ;
+                  <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:EminemSDiscography ;
+                  mu:contain <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'My_Name_Is'> ;
+                  mu:olderThen mu:TheMarshallMathersLP ;
+                  mu:yearsOfPubblication 1999 ;
+                  rdfs:comment "An Eminem's album"@en ;
+                  rdfs:label "TheSlimShadyLP"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTheWayIAm
+mu:TheWayIAm rdf:type owl:NamedIndividual ,
+                      mu:Track ;
+             mu:isContainedIn mu:TheMarshallMathersLP ;
+             rdfs:comment "An Eminem's song"@en ;
+             rdfs:label "TheWayIAm"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaTrap
+mu:Trap rdf:type owl:NamedIndividual ,
+                 mu:MusicGenre ;
+        rdfs:comment "A kind of music genre"@en ;
+        rdfs:label "Trap"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaUmanista
+mu:Umanista rdf:type owl:NamedIndividual ,
+                     mu:Track ;
+            mu:isContainedIn <http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Tree_-_Roots_&_Crown'> ;
+            rdfs:comment "A Mezzosangue's Song"@en ;
+            rdfs:label "Umanista"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/MusicistaWalkOnWater
+mu:WalkOnWater rdf:type owl:NamedIndividual ,
+                        mu:Track ;
+               mu:isContainedIn mu:Revival ;
+               rdfs:comment "An Eminem's song"@en ;
+               rdfs:label "WalkOnWater"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Just_Lose_It'
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Just_Lose_It'> rdf:type owl:NamedIndividual ,
+                                                                                       mu:Track ;
+                                                                              mu:isContainedIn mu:Encore ;
+                                                                              rdfs:comment "An Eminem's song"@en ;
+                                                                              rdfs:label "Just Lose It"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'My_Name_Is'
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'My_Name_Is'> rdf:type owl:NamedIndividual ,
+                                                                                     mu:Track ;
+                                                                            mu:isContainedIn mu:TheSlimShadyLP ;
+                                                                            mu:madeBy mu:Eminem ;
+                                                                            rdfs:comment "An Eminem's song"@en ;
+                                                                            rdfs:label "My Name Is"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Not_Afraid'
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Not_Afraid'> rdf:type owl:NamedIndividual ,
+                                                                                     mu:Track ;
+                                                                            mu:isContainedIn mu:Recovery ;
+                                                                            rdfs:comment "An Eminem's Song"@en ;
+                                                                            rdfs:label "Not Afraid"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Rap_God'
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Rap_God'> rdf:type owl:NamedIndividual ,
+                                                                                  mu:Track ;
+                                                                         mu:isContainedIn mu:TheMarshallMathersLP2 ;
+                                                                         rdfs:comment "An Eminem's Song"@en ;
+                                                                         rdfs:label "Rap God"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Tree_-_Roots_&_Crown'
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'Tree_-_Roots_&_Crown'> rdf:type owl:NamedIndividual ,
+                                                                                               mu:Album ;
+                                                                                      <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> mu:MezzosangueSDiscography ;
+                                                                                      mu:contain mu:Umanista ;
+                                                                                      mu:yearsOfPubblication 2018 ;
+                                                                                      rdfs:comment "An Mezzosangue's album"@en ;
+                                                                                      rdfs:label "Tree - Roots & Crown"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'ill_I_Collapse'
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#'ill_I_Collapse'> rdf:type owl:NamedIndividual ,
+                                                                                         mu:Track ;
+                                                                                mu:isContainedIn mu:TheEminemShow ;
+                                                                                mu:madeBy mu:Eminem ;
+                                                                                rdfs:comment "An Eminem's song"@en ;
+                                                                                rdfs:label "ill I Collapse"@en .
+
+
+###  http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#313
+<http://www.semanticweb.org/sorre/ontologies/2020/1/Musicista#313> rdf:type owl:NamedIndividual ,
+                                                                            mu:Track ;
+                                                                   mu:isContainedIn mu:Infinite ;
+                                                                   rdfs:comment "An Eminem's song"@en ;
+                                                                   rdfs:label "313"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection>
+                mu:Award
+                mu:Event
+                mu:MusicGenre
+                mu:MusicWork
+                mu:Person
+              )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+mu:a rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+mu:b rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#x> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+mu:x rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+mu:s rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+mu:m rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#art1> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#art2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<urn:swrl:var#t> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "A Beatmaker is the artist who produce the beat" ;
+   rdfs:label "Producer" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mu:Artist ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> mu:a
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:produce ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> mu:a ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> mu:b
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mu:BeatMaker ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> mu:b
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Rule that label as Rapper a singer who do rap" ;
+   rdfs:label "isRapper" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mu:Singer ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#x>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:hasGenre ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> mu:Rap
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mu:Rapper ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "A Track is composed by a lyrics and a sound" ;
+   rdfs:label "RapSong" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mu:Track ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> mu:x
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> mu:Lyrics ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> mu:x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> mu:Beat ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> mu:x
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "A rapper write lyrics following the rithm of the beat" ;
+   rdfs:label "CreateRapSong" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:make ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> mu:s ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> mu:m
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:writeSong ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> mu:s ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> mu:m
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "A collaboration between two artists" ;
+   rdfs:label "Featuring" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#art1> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#art2>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:publishSong ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#art1> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#t>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:publishSong ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#art2> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#t>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> mu:collaborateWith ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <urn:swrl:var#art1> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#art2>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
